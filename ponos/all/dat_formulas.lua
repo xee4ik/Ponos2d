@@ -1,0 +1,176 @@
+function updateFormulasWords()
+
+local words = {}
+if ponosSettings['engFormulas'] then
+    words = require("ponos.words.eng")
+else
+    words = app.words
+end
+
+all_formulas = {
+    ["properties"] = {
+        {app.words[169], {
+            { {"func", "pos_x"}, {"function", "("}, {"string", "object"}, {"function", ")"} },
+            { {"func", "pos_y"}, {"function", "("}, {"string", "object"}, {"function", ")"} },
+            { {"func", "width"}, {"function", "("}, {"string", "object"}, {"function", ")"} },
+            { {"func", "height"}, {"function", "("}, {"string", "object"}, {"function", ")"} },
+            { {"func", "xScale"}, {"function", "("}, {"string", "object"}, {"function", ")"} },
+            { {"func", "yScale"}, {"function", "("}, {"string", "object"}, {"function", ")"} },
+            { {"func", "rotation"}, {"function", "("}, {"string", "object"}, {"function", ")"} },
+            { {"func", "alpha"}, {"function", "("}, {"string", "object"}, {"function", ")"} },
+            { {"func", "visible"}, {"function", "("}, {"string", "object"}, {"function", ")"} },
+            { {"func", "anchorX"}, {"function", "("}, {"string", "object"}, {"function", ")"} },
+            { {"func", "anchorY"}, {"function", "("}, {"string", "object"}, {"function", ")"} },
+            { {"func", "text"}, {"function", "("}, {"string", "object"}, {"function", ")"} },
+            { {"func", "object_var"}, {"function", "("}, {"string", "object"}, {"function", ","}, {"string", "variable"}, {"function", ")"} },
+        }},
+    },
+    ["logic"] = {
+        {app.words[182], {
+            { {"function", "and"} },
+            { {"function", "or"} },
+            { {"function", "not"} },
+            { {"function", "true"} },
+            { {"function", "false"} },
+			{ {"function", "nil"} },
+        }},
+        {app.words[183], {
+            { {"function", "=="} },
+            { {"function", "~="} },
+            { {"function", ">"} },
+            { {"function", ">="} },
+            { {"function", "<"} },
+            { {"function", "<="} },
+            { {"function", ","} },
+        }},
+    },
+    ["func"] = {
+        {app.words[236], {
+            { {"func", "sin"}, {"function", "("}, {"number", 90}, {"function", ")"} },
+            { {"func", "cos"}, {"function", "("}, {"number", 90}, {"function", ")"} },
+            { {"func", "tg"}, {"function", "("}, {"number", 90}, {"function", ")"} },
+            { {"func", "ctg"}, {"function", "("}, {"number", 90}, {"function", ")"} },
+            { {"func", "asin"}, {"function", "("}, {"number", 1}, {"function", ")"} },
+            { {"func", "acos"}, {"function", "("}, {"number", 1}, {"function", ")"} },
+            { {"func", "atan"}, {"function", "("}, {"number", 1}, {"function", ")"} },
+            { {"func", "floor"}, {"function", "("}, {"number", 0.5}, {"function", ")"} },
+            { {"func", "ceil"}, {"function", "("}, {"number", 0.5}, {"function", ")"} },
+            { {"func", "round"}, {"function", "("}, {"number", 0.5}, {"function", ")"} },
+            { {"func", "abs"}, {"function", "("}, {"number", -5}, {"function", ")"} },
+            { {"func", "sqrt"}, {"function", "("}, {"number", 16}, {"function", ")"} },
+            { {"func", "pow"}, {"function", "("}, {"number", 2}, {"function", ","}, {"number", 3}, {"function", ")"} },
+            { {"func", "min"}, {"function", "("}, {"number", 1}, {"function", ","}, {"number", 5}, {"function", ")"} },
+            { {"func", "max"}, {"function", "("}, {"number", 1}, {"function", ","}, {"number", 5}, {"function", ")"} },
+            { {"func", "random"}, {"function", "("}, {"number", 1}, {"function", ","}, {"number", 6}, {"function", ")"} },
+            { {"func", "log10"}, {"function", "("}, {"number", 100}, {"function", ")"} },
+            { {"func", "deg"}, {"function", "("}, {"number", 3.14}, {"function", ")"} },
+            { {"func", "rad"}, {"function", "("}, {"number", 180}, {"function", ")"} },
+        }},
+        {app.words[237], {
+            { {"func", "str_len"}, {"function", "("}, {"string", "text"}, {"function", ")"} },
+            { {"func", "str_upper"}, {"function", "("}, {"string", "text"}, {"function", ")"} },
+            { {"func", "str_lower"}, {"function", "("}, {"string", "text"}, {"function", ")"} },
+            { {"func", "str_sub"}, {"function", "("}, {"string", "text"}, {"function", ","}, {"number", 1}, {"function", ","}, {"number", 3}, {"function", ")"} },
+            { {"func", "str_rep"}, {"function", "("}, {"string", "text"}, {"function", ","}, {"number", 2}, {"function", ")"} },
+            { {"func", "str_reverse"}, {"function", "("}, {"string", "text"}, {"function", ")"} },
+            { {"func", "str_find"}, {"function", "("}, {"string", "text"}, {"function", ","}, {"string", "sub"}, {"function", ")"} },
+        }},
+		{app.words[482], {
+            { {"func", "rgb_to_hex"}, {"function", "("}, {"number", 255}, {"function", ","}, {"number", 255}, {"function", ","}, {"number", 255}, {"function", ")"} },
+        }},
+    },
+	["device"] = {
+        {app.words[211], {
+		    { {"func", "screen_width"} },
+			{ {"func", "screen_height"} },
+			{ {"func", "screen_centerX"} },
+			{ {"func", "screen_centerY"} },
+            --{ {"func", "get_fps"} },
+        }},
+        {app.words[488], {
+		    { {"func", "camera_x"} },
+			{ {"func", "camera_y"} },
+        }},
+    },
+	["data"] = {
+        {app.words[215], {
+		    { {"func", "get_var"}, {"function", "("}, {"string", "variable"}, {"function", ")"} },
+        }},
+		{"{=}", {
+		    {{"function", "{"},{"function", "}"}},
+			{{"function", "["},{"function", "]"}},
+			{ {"func", "JSON_encode"}, {"function", "("}, {"string", "{}"}, {"function", ")"} },
+			{ {"func", "JSON_decode"}, {"function", "("}, {"function", "{"}, {"function", "}"}, {"function", ")"} },
+        }},
+    },
+}
+
+funs_words = {
+    pos_x = words[170], 
+    pos_y = words[171], 
+    width = words[172], 
+    height = words[173], 
+    xScale = words[174], 
+    yScale = words[175], 
+    rotation = words[176], 
+    alpha = words[177], 
+    visible = words[178], 
+    anchorX = words[179], 
+    anchorY = words[180], 
+    text = words[181],
+	object_var = "obj-v",
+    sin = words[185], 
+    cos = words[186], 
+    tg = words[187], 
+    ctg = words[188], 
+    asin = words[189],
+    acos = words[190],
+    atan = words[191],
+    floor = words[192], 
+    ceil = words[193],
+    round = words[194],
+    abs = words[195],
+    sqrt = words[196],
+    pow = words[197],
+    min = words[198],
+    max = words[199],
+    random = words[200], 
+    log10 = words[201],
+    deg = words[202],
+    rad = words[203],
+    str_len = words[204],
+    str_upper = words[205],
+    str_lower = words[206],
+    str_sub = words[207],
+    str_rep = words[208],
+    str_reverse = words[209],
+    str_find = words[210],
+    get_fps = words[212],
+    screen_width = words[213],
+    screen_height = words[214],
+    get_var = "v",
+    JSON_encode = words[216],
+    JSON_decode = words[217],
+    screen_centerX = app.words[486],
+    screen_centerY = app.words[487],
+    get_vel_x = "скорость X",
+    get_vel_y = "скорость Y",
+    get_angular_vel = "угловая скорость",
+    get_gravity_scale = "гравитация",
+    get_density = "плотность",
+    get_bounce = "упругость",
+    get_friction = "трение",
+    is_sensor = "сенсор",
+    is_bullet = "пуля",
+    is_fixed_rotation = "фикс. вращение",
+    get_linear_damping = "лин. затухание",
+    get_angular_damping = "угл. затухание",
+	camera_x = app.words[483],
+	camera_y = app.words[484],
+	rgb_to_hex = app.words[485],
+}
+
+
+end
+
+updateFormulasWords()
